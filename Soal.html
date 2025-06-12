@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan Soal Wawasan Nusantara & Budaya</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+    .question {
+      margin-bottom: 25px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .question h3 {
+      margin-bottom: 10px;
+    }
+    button {
+      display: block;
+      margin: 5px 0;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      background-color: #eee;
+      cursor: pointer;
+      text-align: left;
+    }
+    button:hover {
+      background-color: #ddd;
+    }
+    .feedback {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+    }
+    .incorrect {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Latihan Soal Wawasan Nusantara dan Pelestarian Budaya</h1>
+  <div id="questions"></div>
+  <script>
+    const soal = [
+      {q: "Apa yang dimaksud dengan pelestarian budaya bangsa?", options: ["Mengganti budaya lama dengan yang baru", "Menolak budaya asing", "Upaya menjaga dan mempertahankan budaya nasional", "Menghilangkan budaya daerah"], answer: 2},
+      {q: "Makna dari permainan tradisional 'engklek' adalah...", options: ["Melatih kekuatan fisik", "Melatih keseimbangan dan kesabaran", "Mencari kemenangan", "Melatih kemampuan berbicara"], answer: 1},
+      {q: "Makna corak batik parang adalah...", options: ["Keagungan dan kekuasaan", "Kelembutan dan cinta kasih", "Keberanian dan semangat", "Kesederhanaan dan kesetiaan"], answer: 0},
+      {q: "Makna corak batik kawung adalah...", options: ["Kemenangan dalam perang", "Kebersihan hati dan pengendalian diri", "Kejayaan dan keberanian", "Kesabaran dalam hidup"], answer: 1},
+      {q: "Asas wawasan Nusantara adalah...", options: ["Persatuan dalam keberagaman", "Keadilan sosial", "Kekuasaan tertinggi", "Keseimbangan dan keselarasan"], answer: 3},
+      {q: "Salah satu faktor penyebab pudarnya budaya nasional adalah...", options: ["Semakin populernya budaya lokal", "Semakin rendahnya pendidikan", "Pengaruh budaya asing tanpa filter", "Adanya festival budaya"], answer: 2},
+      {q: "Fungsi wawasan Nusantara adalah...", options: ["Sebagai pedoman pembangunan", "Sebagai alat politik luar negeri", "Sebagai alat ekonomi nasional", "Sebagai pengganti hukum"], answer: 0},
+      {q: "Konsepsi wawasan Nusantara adalah...", options: ["Cara pandang bangsa Indonesia terhadap hukum", "Cara pandang bangsa Indonesia terhadap wilayah sebagai satu kesatuan", "Pemahaman tentang budaya asing", "Strategi politik pemerintahan"], answer: 1},
+      {q: "Kedudukan wawasan Nusantara adalah...", options: ["Sebagai ide utama dalam PBB", "Sebagai wawasan dunia", "Sebagai ajaran agama", "Sebagai wawasan nasional yang menjadi landasan bagi pembangunan"], answer: 3},
+      {q: "Tujuan wawasan Nusantara adalah...", options: ["Memperkuat kekuasaan pemerintah pusat", "Menciptakan ketahanan nasional", "Mengembangkan budaya asing", "Memperluas wilayah negara"], answer: 1},
+      {q: "Perwujudan wawasan Nusantara dapat dilihat dari...", options: ["Perselisihan antar daerah", "Dominasi budaya asing", "Kerja sama antar wilayah", "Perbedaan kebijakan tiap provinsi"], answer: 2},
+      {q: "Asas yang digunakan dalam wawasan Nusantara adalah...", options: ["Kepentingan pribadi diutamakan", "Keselarasan antara kepentingan nasional dan daerah", "Kekuatan militer sebagai dasar", "Penyeragaman budaya"], answer: 1},
+      {q: "Sikap yang mencerminkan wawasan Nusantara adalah...", options: ["Mengutamakan kepentingan daerah sendiri", "Menolak budaya luar sepenuhnya", "Menjaga persatuan dan kesatuan bangsa", "Mendukung separatisme"], answer: 2},
+      {q: "Salah satu contoh pelestarian budaya adalah...", options: ["Mengganti gamelan dengan gitar listrik", "Mengabaikan tarian daerah", "Mengajarkan tari tradisional di sekolah", "Menghilangkan upacara adat"], answer: 2},
+      {q: "Permainan tradisional membantu melatih...", options: ["Kecerdasan digital", "Kepekaan sosial dan kerja sama", "Kemampuan bahasa asing", "Kemampuan menulis"], answer: 1},
+      {q: "Batik dengan motif mega mendung berasal dari...", options: ["Solo", "Pekalongan", "Cirebon", "Banyumas"], answer: 2},
+      {q: "Wawasan Nusantara berfungsi sebagai wawasan...", options: ["Sosial saja", "Ekonomi saja", "Kebudayaan saja", "Nasional dalam semua aspek kehidupan"], answer: 3},
+      {q: "Tujuan utama pelestarian budaya adalah...", options: ["Memperkenalkan budaya asing", "Menambah pendapatan negara", "Mempertahankan identitas bangsa", "Mengurangi tradisi lama"], answer: 2},
+      {q: "Yang bukan termasuk unsur budaya adalah...", options: ["Bahasa", "Adat istiadat", "Teknologi", "Sinyal seluler"], answer: 3},
+      {q: "Wawasan Nusantara menciptakan rasa...", options: ["Persaingan", "Permusuhan", "Persatuan", "Kebingungan"], answer: 2},
+      {q: "Perilaku yang mencerminkan wawasan kebangsaan adalah...", options: ["Tawuran antar pelajar", "Menghormati perbedaan budaya", "Membenci budaya luar", "Menolak upacara bendera"], answer: 1},
+      {q: "Permainan tradisional seperti gobak sodor melatih...", options: ["Kecepatan berlari dan kerja sama", "Kemampuan menyanyi", "Kekuatan tangan", "Konsentrasi belajar"], answer: 0},
+      {q: "Salah satu ciri masyarakat yang cinta budaya adalah...", options: ["Malas belajar", "Aktif berperan dalam kegiatan budaya", "Hanya menonton budaya asing", "Menolak upacara adat"], answer: 1},
+      {q: "Batik termasuk dalam warisan budaya tak benda yang diakui oleh...", options: ["ASEAN", "UNESCO", "PBB", "MPR"], answer: 1},
+      {q: "Pola pikir masyarakat modern sering menyebabkan...", options: ["Pelestarian budaya", "Penghormatan adat", "Pengabaian budaya lokal", "Peningkatan kesadaran"], answer: 2},
+      {q: "Wawasan Nusantara mengajarkan kita untuk...", options: ["Mengutamakan kelompok sendiri", "Mengabaikan hukum", "Menghargai perbedaan dan persatuan", "Menutup diri dari luar"], answer: 2},
+      {q: "Contoh perwujudan wawasan Nusantara di bidang ekonomi adalah...", options: ["Persaingan bebas antar daerah", "Kerja sama ekonomi antar provinsi", "Dominasi satu daerah", "Monopoli"], answer: 1},
+      {q: "Nilai utama dalam wawasan Nusantara adalah...", options: ["Kesenjangan", "Kebersamaan", "Persaingan", "Keterpencilan"], answer: 1},
+      {q: "Batik tulis berbeda dengan batik cap karena...", options: ["Lebih murah", "Lebih cepat", "Dibuat manual dan unik", "Berwarna lebih cerah"], answer: 2},
+      {q: "Makna dari motif batik Truntum adalah...", options: ["Kesetiaan dan kasih sayang abadi", "Perjuangan dan kemerdekaan", "Kekuasaan dan keagungan", "Kesedihan dan duka"], answer: 0},
+      {q: "Permainan tradisional dapat mempererat...", options: ["Persaingan", "Permusuhan", "Kerja sama dan keakraban", "Jarak sosial"], answer: 2},
+      {q: "Menjaga warisan budaya adalah tanggung jawab...", options: ["Pemerintah saja", "Masyarakat saja", "Guru saja", "Semua warga negara"], answer: 3},
+      {q: "Ciri dari pelaku wawasan kebangsaan adalah...", options: ["Menjaga perbedaan dan mengutamakan persatuan", "Membela daerahnya saja", "Mengabaikan kebhinekaan", "Hanya peduli agama sendiri"], answer: 0},
+      {q: "Wawasan Nusantara menjadi landasan dalam pembangunan nasional karena...", options: ["Memperkuat konflik daerah", "Mendorong disintegrasi", "Mempersatukan keragaman bangsa", "Menyeragamkan semua budaya"], answer: 2},
+      {q: "Salah satu ancaman bagi budaya nasional adalah...", options: ["Pariwisata", "Modernisasi tanpa kontrol", "Festival budaya", "Kurikulum sekolah"], answer: 1},
+      {q: "Sikap menghormati budaya orang lain menunjukkan...", options: ["Kesombongan", "Kepedulian budaya", "Pengabaian", "Ketidaksukaan"], answer: 1},
+      {q: "Gotong royong mencerminkan nilai...", options: ["Konsumerisme", "Individualisme", "Kebersamaan dan persatuan", "Kompetisi bebas"], answer: 2},
+      {q: "Meningkatkan rasa cinta tanah air bisa dilakukan dengan...", options: ["Mengunjungi situs budaya", "Membenci budaya asing", "Menolak perubahan", "Mengasingkan diri"], answer: 0},
+      {q: "Mengikuti upacara bendera mencerminkan...", options: ["Wawasan ekonomi", "Wawasan budaya", "Wawasan kebangsaan", "Wawasan pendidikan"], answer: 2},
+      {q: "Pengaruh negatif globalisasi terhadap budaya adalah...", options: ["Meningkatkan cinta lokal", "Menumbuhkan kreativitas", "Meniru budaya asing secara buta", "Menambah pengetahuan budaya"], answer: 2},
+      {q: "Cinta budaya nasional bisa ditunjukkan dengan cara...", options: ["Memamerkan budaya asing", "Menghafal lirik lagu luar", "Mempelajari tarian daerah", "Berbicara bahasa asing saja"], answer: 2},
+      {q: "Batik, wayang, dan keris adalah contoh...", options: ["Kesenian asing", "Karya dari Jepang", "Warisan budaya nasional", "Pakaian modern"], answer: 2},
+      {q: "Wawasan Nusantara pertama kali dicetuskan pada...", options: ["Sumpah Pemuda 1928", "Konferensi Meja Bundar", "Sidang BPUPKI", "Era Orde Baru"], answer: 3}
+    ];const container = document.getElementById("questions");
+soal.forEach((item, index) => {
+  const div = document.createElement("div");
+  div.className = "question";
+  const h3 = document.createElement("h3");
+  h3.textContent = `${index + 1}. ${item.q}`;
+  div.appendChild(h3);
+  item.options.forEach((option, i) => {
+    const button = document.createElement("button");
+    button.textContent = String.fromCharCode(65 + i) + ". " + option;
+    button.onclick = () => checkAnswer(button, i === item.answer, String.fromCharCode(65 + item.answer));
+    div.appendChild(button);
+  });
+  const feedback = document.createElement("p");
+  feedback.className = "feedback";
+  div.appendChild(feedback);
+  container.appendChild(div);
+});
+
+function checkAnswer(button, isCorrect, correctLetter) {
+  const feedback = button.parentElement.querySelector(".feedback");
+  if (feedback.textContent) return;
+  if (isCorrect) {
+    feedback.textContent = "Benar!";
+    feedback.className = "feedback correct";
+    button.style.backgroundColor = "#c8e6c9";
+  } else {
+    feedback.textContent = "Salah. Jawaban yang benar adalah: " + correctLetter;
+    feedback.className = "feedback incorrect";
+    button.style.backgroundColor = "#ffcdd2";
+  }
+}
+
+  </script>
+</body>
+  </html>
